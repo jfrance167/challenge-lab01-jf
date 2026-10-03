@@ -21,3 +21,47 @@ This repository preserves work from my **Cloud Computing Architecture** course. 
 These files reflect a hands-on learning exercise in Azure resource deployment, storage configuration, lifecycle management, and infrastructure-as-code review. Some naming and folder structure follow the original course submission format.
 
 The templates are retained as evidence of the learning process. They should be reviewed and updated before reuse because cloud APIs, security guidance, and organizational requirements change over time.
+
+## Local review and safe reuse
+
+Clone this repository and inspect the Markdown and JSON files locally; no cloud
+subscription or deployment is needed to review the coursework. These exports are
+historical evidence. Empty parameter files and export placeholders, where noted
+above, are not deployable templates and are deliberately preserved.
+
+Use only an isolated subscription you own or are authorized to administer, with
+a cost limit and teardown plan, for any future exercise. Review actual network
+access, identities, credentials, names and API versions before deploying. Never
+commit local credentials or production resource exports. See [SECURITY.md](SECURITY.md).
+
+The retained storage export permits public-network access; private containers
+still require authorization and this does not prove anonymous data access.
+For a new deployment, evaluate the following storage-account properties together
+with private endpoint/DNS configuration and Microsoft Entra role assignments:
+
+```json
+{
+  "publicNetworkAccess": "Disabled",
+  "allowSharedKeyAccess": false,
+  "defaultToOAuthAuthentication": true,
+  "allowBlobPublicAccess": false,
+  "supportsHttpsTrafficOnly": true,
+  "minimumTlsVersion": "TLS1_2"
+}
+```
+
+This is a proposed hardening excerpt, not a complete deployment. Validate clients
+and management access before applying it; disabling shared keys can break older
+clients. The original course exports have not been rewritten or redeployed.
+
+## Repository map
+
+```text
+challenge-lab01-jf/
+|-- .gitignore
+|-- README.md
+|-- SECURITY.md
+`-- student-submissions/
+```
+
+Follow the setup and safety boundaries above before running or deploying any code.
